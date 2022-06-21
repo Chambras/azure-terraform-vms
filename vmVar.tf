@@ -73,10 +73,17 @@ variable "vmDetails" {
       sku  = "77-gen2"
       size = "Standard_E2s_v3"
     }
-    ubuntu = {
-      name = "Ubuntu"
-      sku  = "18.04-LTS"
-      size = "Standard_E2s_v3"
+    ubuntu18 = {
+      name  = "Ubuntu"
+      offer = "UbuntuServer"
+      sku   = "18.04-LTS"
+      size  = "Standard_E2s_v3"
+    }
+    ubuntu20 = {
+      name  = "Ubuntu"
+      offer = "0001-com-ubuntu-server-focal"
+      sku   = "20_04-lts-gen2"
+      size  = "Standard_E2s_v3"
     }
   }
   description = "VM details. You can add more items to the map in order to customize anything related to the VM."

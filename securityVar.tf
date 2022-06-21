@@ -7,7 +7,7 @@ variable "sgName" {
 
 variable "sourceIPs" {
   type        = list(string)
-  default     = ["173.66.39.236"]
+  default     = ["173.66.39.236", "167.220.148.112"]
   description = "Public IPs to allow inboud communications."
 }
 

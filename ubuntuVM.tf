@@ -31,7 +31,7 @@ resource "azurerm_linux_virtual_machine" "ubuntuVM" {
   name                  = "${var.suffix}${var.ubuntuVMName}"
   resource_group_name   = azurerm_resource_group.mainRG.name
   location              = azurerm_resource_group.mainRG.location
-  size                  = var.vmDetails["ubuntu"].size
+  size                  = var.vmDetails["ubuntu20"].size
   admin_username        = var.vmUserName
   network_interface_ids = [azurerm_network_interface.ubuntuNI.id, ]
 
@@ -44,12 +44,13 @@ resource "azurerm_linux_virtual_machine" "ubuntuVM" {
     name                 = "${var.suffix}${var.ubuntuVMName}OSDisk"
     caching              = "ReadWrite"
     storage_account_type = var.osDisk
+    disk_size_gb         = 200
   }
 
   source_image_reference {
     publisher = "Canonical"
-    offer     = "UbuntuServer"
-    sku       = var.vmDetails["ubuntu"].sku
+    offer     = var.vmDetails["ubuntu20"].offer
+    sku       = var.vmDetails["ubuntu20"].sku
     version   = "latest"
   }
 

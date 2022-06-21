@@ -1,5 +1,5 @@
 resource "azurerm_network_security_group" "sshNSG" {
-  name                = "${var.suffix}sshNSG"
+  name                = "${var.suffix}${var.sgName}"
   location            = azurerm_resource_group.mainRG.location
   resource_group_name = azurerm_resource_group.mainRG.name
 
@@ -9,7 +9,7 @@ resource "azurerm_network_security_group" "sshNSG" {
     priority                = 100
     direction               = "Inbound"
     access                  = "Allow"
-    protocol                = "TCP"
+    protocol                = "Tcp"
     source_port_range       = "*"
     destination_port_range  = var.nsgDetailsList[0].value
     source_address_prefixes = var.sourceIPs
@@ -19,14 +19,15 @@ resource "azurerm_network_security_group" "sshNSG" {
 
   # Using Maps
   security_rule {
-    name                       = var.nsgDetails["ssh"].name
-    priority                   = 100
-    direction                  = "Inbound"
-    access                     = "Allow"
-    protocol                   = "TCP"
-    source_port_range          = "*"
-    destination_port_range     = var.nsgDetails["ssh"].port
-    source_address_prefixes    = var.sourceIPs
+    name                   = var.nsgDetails["ssh"].name
+    priority               = 100
+    direction              = "Inbound"
+    access                 = "Allow"
+    protocol               = "Tcp"
+    source_port_range      = "*"
+    destination_port_range = var.nsgDetails["ssh"].port
+    # source_address_prefixes    = var.sourceIPs
+    source_address_prefix      = "*"
     destination_address_prefix = "VirtualNetwork"
   }
   security_rule {
@@ -34,7 +35,7 @@ resource "azurerm_network_security_group" "sshNSG" {
     priority                   = 120
     direction                  = "Inbound"
     access                     = "Allow"
-    protocol                   = "TCP"
+    protocol                   = "Tcp"
     source_port_range          = "*"
     destination_port_range     = var.nsgDetails["http"].port
     source_address_prefixes    = var.sourceIPs
@@ -45,7 +46,7 @@ resource "azurerm_network_security_group" "sshNSG" {
     priority                   = 130
     direction                  = "Inbound"
     access                     = "Allow"
-    protocol                   = "TCP"
+    protocol                   = "Tcp"
     source_port_range          = "*"
     destination_port_range     = var.nsgDetails["vault"].port
     source_address_prefixes    = var.sourceIPs
@@ -65,7 +66,7 @@ resource "azurerm_network_security_group" "rdpNSG" {
     priority                   = 110
     direction                  = "Inbound"
     access                     = "Allow"
-    protocol                   = "TCP"
+    protocol                   = "Tcp"
     source_port_range          = "*"
     destination_port_range     = var.nsgDetails["rdp"].port
     source_address_prefixes    = var.sourceIPs
@@ -85,7 +86,7 @@ resource "azurerm_network_security_group" "httpNSG" {
     priority                   = 120
     direction                  = "Inbound"
     access                     = "Allow"
-    protocol                   = "TCP"
+    protocol                   = "Tcp"
     source_port_range          = "*"
     destination_port_range     = var.nsgDetails["http"].port
     source_address_prefixes    = var.sourceIPs

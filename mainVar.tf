@@ -5,7 +5,9 @@ variable "location" {
 }
 
 variable "suffix" {
-  default = "MZV"
+  type        = string
+  default     = "MZV"
+  description = "To be added at the beginning of each resource."
 }
 
 variable "tags" {
@@ -15,6 +17,7 @@ variable "tags" {
     "Project"     = "DevOps"
     "BillingCode" = "Internal"
   }
+  description = "tags to be applied to the resource."
 }
 
 variable "rgName" {

@@ -49,11 +49,15 @@ output "ubuntuSSHAccess" {
 
 # Windows
 output "windowsPublicIP" {
-  value = azurerm_public_ip.winPublicIP.ip_address
+  value       = azurerm_public_ip.winPublicIP.ip_address
+  description = "The public IP address of the Windows server instance."
+  sensitive   = false
 }
 
 output "windowsPrivateIP" {
-  value = azurerm_network_interface.winNI.private_ip_address
+  value       = azurerm_network_interface.winNI.private_ip_address
+  description = "The private IP address of the Windows server instance."
+  sensitive   = false
 }
 
 # RedHat
